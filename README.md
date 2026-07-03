@@ -2,7 +2,7 @@
 
 **Curvature-Guided Sheaf Diffusion** — unsupervised community detection on heterophilic graphs.
 
-Paper: [paper/paper.pdf](paper/paper.pdf) · Code: https://github.com/woodywff/cgsd
+Paper: [Curvature-Guided Sheaf Diffusion for Unsupervised Community Detection on Heterophilic Graphs](https://arxiv.org/abs/2606.30249) 
 
 ## Install
 
