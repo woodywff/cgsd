@@ -1,5 +1,12 @@
-"""K-Means + NMI evaluation protocol."""
+"""Unified KMeans+NMI evaluation protocol.
 
+This is the same protocol used in the paper's Table 1 (EVAL_PROTOCOL.md):
+    KMeans(seed=0, n_init=10, k=n_classes) -> NMI vs ground truth.
+
+This module is the SINGLE SOURCE OF TRUTH for evaluation in cgsd_release.
+The release does not depend on the parent project's unified_eval.py —
+this is a self-contained copy.
+"""
 from __future__ import annotations
 
 from typing import Union
@@ -16,6 +23,7 @@ from sklearn.metrics import (
     v_measure_score,
 )
 
+# Protocol constants — DO NOT change without re-running every result.
 KMEANS_SEED: int = 0
 KMEANS_N_INIT: int = 10
 
@@ -27,17 +35,18 @@ def evaluate_nmi(
     n_init: int = KMEANS_N_INIT,
     seed: int = KMEANS_SEED,
 ) -> dict:
-    """Cluster an embedding with K-Means and report NMI/ARI.
+    """Run KMeans(embedding) -> cluster assignment, return clustering metrics.
 
-    Args:
-        embedding: Node embeddings ``[N, d]``, or 1-D assignments.
-        labels: Ground-truth labels ``[N]`` (evaluation only).
-        k: Number of clusters. Defaults to ``labels.max() + 1``.
-        n_init: K-Means restarts.
-        seed: K-Means random seed.
+    Parameters
+    ----------
+    embedding : (N, d) or (N,) array-like.
+        If 1D, treated as cluster assignments directly (no KMeans).
+    labels    : (N,) array-like of ground-truth labels.
+    k         : number of clusters.  Defaults to labels.max() + 1.
 
-    Returns:
-        Dict with ``nmi``, ``ari``, and related metrics.
+    Returns
+    -------
+    dict with keys: nmi, ari, fmi, homo, compl, v_measure, k, n, pred
     """
     if hasattr(embedding, "detach"):
         embedding = embedding.detach().cpu().numpy()
@@ -46,7 +55,7 @@ def evaluate_nmi(
     embedding = np.asarray(embedding)
     labels = np.asarray(labels)
 
-    n_nodes = labels.shape[0]
+    n = labels.shape[0]
     if k is None:
         k = int(labels.max()) + 1
 
@@ -57,13 +66,12 @@ def evaluate_nmi(
             remap = {v: i for i, v in enumerate(unique)}
             pred = np.array([remap[v] for v in pred])
     else:
-        if embedding.shape[0] != n_nodes:
+        if embedding.shape[0] != n:
             raise ValueError(
-                f"embedding has {embedding.shape[0]} rows but labels has {n_nodes}"
+                f"embedding has {embedding.shape[0]} rows but labels has {n}"
             )
-        pred = KMeans(n_clusters=k, n_init=n_init, random_state=seed).fit_predict(
-            embedding
-        )
+        km = KMeans(n_clusters=k, n_init=n_init, random_state=seed)
+        pred = km.fit_predict(embedding)
 
     return {
         "nmi": float(normalized_mutual_info_score(labels, pred)),
@@ -73,6 +81,6 @@ def evaluate_nmi(
         "compl": float(completeness_score(labels, pred)),
         "v_measure": float(v_measure_score(labels, pred)),
         "k": int(k),
-        "n": int(n_nodes),
+        "n": int(n),
         "pred": pred,
     }
