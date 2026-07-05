@@ -1,9 +1,9 @@
 """2-second smoke test: train 1 config × 1 seed on Cora only.
 
-Verifies the whole cgsd_release pipeline runs end-to-end on a fresh
+Verifies the whole cgsd pipeline runs end-to-end on a fresh
 checkout. Expected runtime: ~2-5 s on a single CPU.
 
-Usage (from cgsd_release/):
+Usage (from repo root):
     python scripts/smoke_test.py
 """
 from __future__ import annotations
@@ -12,14 +12,14 @@ import os
 import sys
 import time
 
-# Make cgsd_release importable when invoked as a script.
+# Make cgsd importable when invoked as a script.
 HERE = os.path.dirname(os.path.abspath(__file__))
 PKG_PARENT = os.path.dirname(HERE)
 sys.path.insert(0, PKG_PARENT)
 
-from cgsd_release.data import load_dataset
-from cgsd_release.train import train_cgsd_pure
-from cgsd_release.eval import evaluate_nmi
+from cgsd.data import load_dataset
+from cgsd.train import train_cgsd_pure
+from cgsd.eval import evaluate_nmi
 
 
 SMOKE_CFG = {
@@ -32,7 +32,7 @@ SMOKE_CFG = {
 
 def main():
     t0 = time.time()
-    print("=== cgsd_release smoke test (Cora, 1 cfg × 1 seed, 30 epochs) ===")
+    print("=== cgsd smoke test (Cora, 1 cfg × 1 seed, 30 epochs) ===")
     name = "Cora"
     adj, features, labels, n_nodes, n_classes = load_dataset(name)
     print(f"Loaded {name}: N={n_nodes}, K={n_classes}, |E|={adj.nnz}")

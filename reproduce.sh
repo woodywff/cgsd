@@ -13,7 +13,7 @@ cd "$(dirname "$0")"
 
 PYTHON="${PYTHON:-python3}"
 
-echo "=== cgsd_release: end-to-end reproduction (v2026-06-25) ==="
+echo "=== cgsd: end-to-end reproduction (v2026-06-25) ==="
 echo "Python: $($PYTHON --version)"
 echo "Working dir: $(pwd)"
 
@@ -27,7 +27,7 @@ $PYTHON scripts/smoke_test.py
 
 echo
 echo "--- Step 3: run full 5-dataset CGSD + curvature-spectral ---"
-$PYTHON -m cgsd_release.run_all --cluster_strategy curv_spectral
+$PYTHON -m cgsd.run_all --cluster_strategy curv_spectral
 
 echo
 echo "=== Done. ==="

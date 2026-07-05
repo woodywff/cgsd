@@ -39,20 +39,20 @@ first to install dependencies, then the baseline driver resolves.
 
 ```bash
 python scripts/smoke_test.py                              # 2-sec sanity check (Cora)
-python -m cgsd_release.run_all --cluster_strategy curv_spectral   # full CGSD
+python -m cgsd.run_all --cluster_strategy curv_spectral   # full CGSD
 ```
 
 Compare clusterers on the same encoder embedding:
 
 ```bash
-python -m cgsd_release.run_all --cluster_strategy kmeans        # encoder only
-python -m cgsd_release.run_all --cluster_strategy curv_spectral   # full CGSD (CSpec)
+python -m cgsd.run_all --cluster_strategy kmeans        # encoder only
+python -m cgsd.run_all --cluster_strategy curv_spectral   # full CGSD (CSpec)
 ```
 
 ## Layout
 
 ```
-cgsd_release/
+cgsd/
   sheaf.py              # Forman–Ricci + sheaf-diffusion encoder
   losses.py             # modularity / anti-collapse / curvature-recon
   train.py              # label-free trainer

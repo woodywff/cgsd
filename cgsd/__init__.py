@@ -1,4 +1,4 @@
-"""cgsd_release — truly-unsupervised CGSD, label-free, single-config.
+"""cgsd — truly-unsupervised CGSD, label-free, single-config.
 
 This is the canonical open-source release of the CGSD paper code
 (v2026-06-25, plus 2026-07-04 SBM §5.3 evidence):

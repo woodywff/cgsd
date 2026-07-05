@@ -37,10 +37,10 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from cgsd_release.data import DATASETS, load_dataset
-from cgsd_release.train import train_cgsd_pure
-from cgsd_release.cluster_strategies import cluster_curvature_spectral, cluster_kmeans
-from cgsd_release.sheaf import compute_forman_ricci_curvature
+from cgsd.data import DATASETS, load_dataset
+from cgsd.train import train_cgsd_pure
+from cgsd.cluster_strategies import cluster_curvature_spectral, cluster_kmeans
+from cgsd.sheaf import compute_forman_ricci_curvature
 from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
 
 warnings.filterwarnings("ignore")

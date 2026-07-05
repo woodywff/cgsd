@@ -18,8 +18,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.cluster import KMeans
 
-from cgsd_release.sheaf import SheafDiffusion, compute_forman_ricci_curvature
-from cgsd_release.losses import (
+from cgsd.sheaf import SheafDiffusion, compute_forman_ricci_curvature
+from cgsd.losses import (
     _modularity_loss, _collapse_loss_v2, _curvature_recon_loss,
 )
 
@@ -170,6 +170,6 @@ def train_cgsd_pure_from_data(
 
 def train_cgsd_pure(name: str, cfg: dict, seed: int = 0) -> np.ndarray:
     """Train one CGSD-pure run on a named dataset. Returns final embedding."""
-    from cgsd_release.data import load_dataset
+    from cgsd.data import load_dataset
     adj, features, labels, n_nodes, n_classes = load_dataset(name)
     return _train_cgsd_pure_inner(adj, features, n_classes, cfg, seed)

@@ -8,7 +8,7 @@ The parent project (experiments/dmon_mincut.py) supports more datasets
 Table 1 and are deliberately omitted from the release.
 
 Returns labels only for downstream evaluation (KMeans+NMI). Training
-in cgsd_release.train NEVER uses labels.
+in cgsd.train NEVER uses labels.
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from torch_geometric.utils import to_scipy_sparse_matrix
 DATASETS = ("Cora", "Cornell", "Texas", "Wisconsin", "Chameleon")
 
 
-def load_dataset(name: str, root: str = "/tmp/cgsd_release_data") -> tuple:
+def load_dataset(name: str, root: str = "/tmp/cgsd_data") -> tuple:
     """Load one of the 5 Table-1 datasets.
 
     Args:

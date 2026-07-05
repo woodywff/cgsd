@@ -13,7 +13,7 @@ protocol to seeds [0, 1, 2, 3, 4] and writes a fresh CSV so the canonical
 
 Output
 ------
-Default: ``<cgsd_release>/results/baselines_NMI_5seed.csv`` (225 rows).
+Default: ``results/baselines_NMI_5seed.csv`` (225 rows).
 Override with env var ``BASELINES_5SEED_OUT``.
 
 Dependencies
@@ -30,7 +30,7 @@ Dependencies
   The hard-coded ``BASELINES`` absolute path inside ``baselines_official.py``
   resolves this; ``vGraph/model.py`` is the only Tier-1 external-repo import.
 
-This script does not vendor the upstream wrappers into ``cgsd_release`` on
+This script does not vendor the upstream wrappers into ``cgsd`` on
 purpose: vendoring 1000+ LOC just to add ``seeds = [0..4]`` would inflate
 the open-source release without adding reproducible signal. The dependency
 is documented here and in the README so that anyone running
@@ -55,14 +55,14 @@ from typing import Any
 warnings.filterwarnings("ignore")
 
 # --------------------------------------------------------------- paths ----
-# cgsd_release/scripts/run_baselines_5seed.py
-_HERE = Path(__file__).resolve().parent                              # .../cgsd_release/scripts/
-_RELEASE_ROOT = _HERE.parent                                          # .../cgsd_release/
-# experiments/sheaf_curvature_001/experiments/baselines_official.py
-# (the wrappers live in the sibling `experiments/` of `cgsd_release/`).
-_EXPERIMENTS = _RELEASE_ROOT.parent / "experiments"
-# Default output CSV inside cgsd_release/results/ (matches run_sbm_sweep.py).
-_DEFAULT_OUT = _RELEASE_ROOT / "results" / "baselines_NMI_5seed.csv"
+# scripts/run_baselines_5seed.py
+_HERE = Path(__file__).resolve().parent                              # .../cgsd/scripts/
+_REPO_ROOT = _HERE.parent                                             # .../cgsd/ (repo root)
+# experiments/baselines_official.py
+# (the wrappers live in the sibling `experiments/` of the repo root).
+_EXPERIMENTS = _REPO_ROOT.parent / "experiments"
+# Default output CSV inside results/ (matches run_sbm_sweep.py).
+_DEFAULT_OUT = _REPO_ROOT / "results" / "baselines_NMI_5seed.csv"
 
 # The wrappers live in experiments/ — add it to sys.path so the bare
 # `from baselines_official import ...` and `from dmon_mincut import ...`

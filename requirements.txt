@@ -1,4 +1,4 @@
-# Pinned dependencies for the cgsd_release open-source release.
+# Pinned dependencies for the cgsd open-source release.
 # Tested on Python 3.10 / 3.11.
 torch>=2.0,<3.0
 torch-geometric>=2.5,<3.0

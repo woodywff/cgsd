@@ -19,12 +19,12 @@ import numpy as np
 _PKG_PARENT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_PKG_PARENT))
 
-from cgsd_release.synthetic import make_sbm
-from cgsd_release.train import train_cgsd_pure_from_data
-from cgsd_release.cluster_strategies import (
+from cgsd.synthetic import make_sbm
+from cgsd.train import train_cgsd_pure_from_data
+from cgsd.cluster_strategies import (
     cluster_kmeans, cluster_curvature_spectral,
 )
-from cgsd_release.sheaf import compute_forman_ricci_curvature
+from cgsd.sheaf import compute_forman_ricci_curvature
 from sklearn.metrics import normalized_mutual_info_score
 
 

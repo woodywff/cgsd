@@ -2,8 +2,8 @@
 
 This is a standalone copy of the SheafDiffusion class from the parent
 project's stage-22/code/main.py (architecture only — the supervised
-loss wrapper is NOT copied). Used by cgsd_release.train and
-cgsd_release.run_all.
+loss wrapper is NOT copied). Used by cgsd.train and
+cgsd.run_all.
 
 References:
     - The SheafDiffusion math is unchanged from the canonical

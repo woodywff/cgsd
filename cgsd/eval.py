@@ -3,7 +3,7 @@
 This is the same protocol used in the paper's Table 1 (EVAL_PROTOCOL.md):
     KMeans(seed=0, n_init=10, k=n_classes) -> NMI vs ground truth.
 
-This module is the SINGLE SOURCE OF TRUTH for evaluation in cgsd_release.
+This module is the SINGLE SOURCE OF TRUTH for evaluation in cgsd.
 The release does not depend on the parent project's unified_eval.py —
 this is a self-contained copy.
 """
